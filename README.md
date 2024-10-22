@@ -25,33 +25,6 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
 ```
 
-# API de Acompanhamento da Carteira de Investimentos
-
-Esta é uma API desenvolvida em Laravel para gerenciar a carteira de investimentos de usuários, incluindo informações sobre ativos financeiros, movimentações e empresas.
-
-## Tecnologias Utilizadas
-
--   Laravel
--   MySQL (ou outro banco de dados suportado)
--   Laravel Sail (para ambiente Docker)
--   Eloquent ORM
-
-## Pré-requisitos
-
--   PHP >= 8.0
--   Composer
--   Docker (se usar Laravel Sail)
--   MySQL (ou outro banco de dados)
-
-## Instalação
-
-### Clone o Repositório
-
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
-```
-
 ### Instalação com e sem o Laravel Sail
 
 1. Instale as dependências com Composer:
