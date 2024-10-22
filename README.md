@@ -21,10 +21,9 @@ Esta é uma API desenvolvida em Laravel para gerenciar a carteira de investiment
 ### Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/afermanx/invest-api.git
+cd invest-api
 ```
-
 ### Instalação com e sem o Laravel Sail
 
 1. Instale as dependências com Composer:
