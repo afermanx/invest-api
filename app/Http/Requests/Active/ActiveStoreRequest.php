@@ -24,6 +24,7 @@ class ActiveStoreRequest extends FormRequest
     {
        $types = array_map(fn($type) => $type->value, TypesEnum::getTypes());
         return [
+            'name' => ['bail', 'string', 'max:255'],
             'ticker' => ['bail', 'required', 'string', 'max:255', 'unique:actives'],
             'quantity' => ['bail', 'required', 'integer'],
             'price' => ['bail', 'required', 'numeric'],
@@ -34,6 +35,8 @@ class ActiveStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'name.string' => 'O campo nome deve ser uma string.',
+            'name.max' => 'O campo nome deve ter no maximo 255 caracteres.',
             'ticker.required' => 'O campo ticker é obrigatório.',
             'ticker.string' => 'O campo ticker deve ser uma string.',
             'ticker.max' => 'O campo ticker deve ter no maximo 255 caracteres.',

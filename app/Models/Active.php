@@ -9,6 +9,7 @@ class Active extends Model
 {
    protected $fillable = [
         'user_id',
+        'name',
         'ticker',
         'purchase_date',
         'quantity',

@@ -45,6 +45,7 @@ class ActiveService
     {
         return [
             ...$data,
+            'name'=> $data['name'] ?? $data['ticker'],
             'user_id' => auth()->user()->id,
             'purchase_date' => now(),
         ];

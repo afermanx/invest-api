@@ -18,6 +18,7 @@ class ActiveResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'ticker' => $this->ticker,
             'purchase_date' => Carbon::parse($this->purchase_date)->format('Y-m-d H:i:s'),
             'quantity' => $this->quantity,

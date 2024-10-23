@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('actives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('name')->nullable();
             $table->string('ticker');
             $table->date('purchase_date');
             $table->integer('quantity');
