@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     Auth\AuthController,
     ActiveController,
-    GetActivePriceDailyController
+    GetActivePriceDailyController,
+    GetActiveTypesController,
 };
 
 Route::prefix('v1')->group(function () {
@@ -39,6 +40,7 @@ Route::prefix('v1')->group(function () {
 
        Route::prefix('actives')->group(function () {
         Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
+        Route::post('/types', GetActiveTypesController::class);
         Route::controller(ActiveController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/', 'store');

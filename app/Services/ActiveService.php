@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\Active\TypesEnum;
 use App\Models\Active;
 use App\Traits\ApiException;
 use Facades\App\Services\AlphaVantage;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ActiveService
@@ -51,6 +51,15 @@ class ActiveService
         $active->delete();
     }
 
+    /**
+     * Retrieve the list of active types.
+     *
+     * @return array An array of active types defined in the TypesEnum.
+     */
+    public function getActiveTypes(): array
+    {
+        return TypesEnum::getTypes();
+    }
 
     /**
      * Sanitizes the given data before creating or updating an Active model.
