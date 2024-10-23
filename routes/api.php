@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     Auth\AuthController,
-    ActiveController
+    ActiveController,
+    GetActivePriceDailyController
 };
 
 Route::prefix('v1')->group(function () {
@@ -35,12 +36,18 @@ Route::prefix('v1')->group(function () {
         });
 
         // Rotas de Active (CRUD)
-        Route::prefix('actives')->controller(ActiveController::class)->group(function () {
+
+       Route::prefix('actives')->group(function () {
+        Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
+        Route::controller(ActiveController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/', 'store');
             Route::get('/{id}', 'show');
             Route::put('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
         });
+    });
+
+
     });
 });

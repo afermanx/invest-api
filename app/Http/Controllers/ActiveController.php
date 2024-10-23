@@ -29,14 +29,17 @@ class ActiveController extends Controller
      */
     public function index(ActiveListRequest $request): JsonResponse
     {
-        $actives = $this->service->list(data: $request->all());
-        return $this->ok(new ActiveResourceCollection($actives));
+        $actives = $this->service->list(data: $request->validated());
+        return $this->ok(ActiveResourceCollection::make($actives));
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param ActiveStoreRequest $request
+     * @return JsonResponse
      */
-    public function store(ActiveStoreRequest $request)
+    public function store(ActiveStoreRequest $request): JsonResponse
     {
        $active = $this->service->create($request->all());
        return $this->ok(ActiveResource::make($active));

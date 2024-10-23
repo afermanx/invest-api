@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Active;
 use App\Traits\ApiException;
+use Facades\App\Services\AlphaVantage;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ActiveService
@@ -47,4 +49,18 @@ class ActiveService
             'purchase_date' => now(),
         ];
     }
+
+    public function getActivePriceDaily(string $ticker): array
+    {
+        $payload = [
+            'function' => 'TIME_SERIES_DAILY',
+            'symbol' => $ticker,
+        ];
+        $res = AlphaVantage::doGetRequest($payload);
+        $lastRefreshed = $res['Meta Data']['3. Last Refreshed'];
+        return [
+           $ticker => $res["Time Series (Daily)"][$lastRefreshed]["4. close"]
+        ];
+    }
+
 }
