@@ -12,6 +12,17 @@ class ActiveService
 {
     use ApiException;
 
+    /**
+     * @param array $data
+     * @return LengthAwarePaginator
+     */
+    /**
+     * List all actives of the current user.
+     * If the 'search' key is present in $data, it will filter the results by matching
+     * the 'ticker' or 'type' fields with the given value.
+     * The 'per_page' key can be used to set the number of records per page.
+     * If not set, it will default to 5 records per page.
+     */
     public function list(array $data): LengthAwarePaginator
     {
         return Active::activeWithUserAuth()
@@ -41,6 +52,15 @@ class ActiveService
     }
 
 
+    /**
+     * Sanitizes the given data before creating or updating an Active model.
+     * If the 'name' key is not present, it will be set to the 'ticker' value.
+     * The 'user_id' key will be set to the current authenticated user's id.
+     * The 'purchase_date' key will be set to the current date and time.
+     *
+     * @param array $data
+     * @return array
+     */
     private function sanitizeData(array &$data): array
     {
         return [
@@ -51,6 +71,15 @@ class ActiveService
         ];
     }
 
+    /**
+     * Busca o preco de fechamento do ativo com a chave $ticker no dia anterior
+     * @param string $ticker Chave do ativo
+     * @return array com a chave $ticker e o preco de fechamento do ativo
+     * Exemplo de retorno:
+     * [
+     *     'PETR4.SA' => 25.99,
+     * ]
+     */
     public function getActivePriceDaily(string $ticker): array
     {
         $payload = [
