@@ -58,6 +58,11 @@ class ActiveService
             'symbol' => $ticker,
         ];
         $res = AlphaVantage::doGetRequest($payload);
+        if(!isset($res['Time Series (Daily)'])) {
+            return [
+                "message" => "Nenhum dado encontrado"
+            ];
+        }
         $lastRefreshed = $res['Meta Data']['3. Last Refreshed'];
         return [
            $ticker => $res["Time Series (Daily)"][$lastRefreshed]["4. close"]
