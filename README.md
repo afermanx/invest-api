@@ -24,6 +24,7 @@ Esta é uma API desenvolvida em Laravel para gerenciar a carteira de investiment
 git clone https://github.com/afermanx/invest-api.git
 cd invest-api
 ```
+
 ### Instalação com e sem o Laravel Sail
 
 1. Instale as dependências com Composer:
@@ -44,14 +45,6 @@ cd invest-api
 2. Configuração do Ambiente:
 
     ##### Copie o arquivo .env.example para .env:
-
-    ##### Sail:
-
-    ```bash
-    ./vendor/bin/sail cp .env.example .env
-    ```
-
-    ##### Normal:
 
     ```bash
     cp .env.example .env
@@ -89,4 +82,18 @@ cd invest-api
         "version": "1.0.0",
         "documentation": "https://documenter.getpostman.com/view/5380407/2sAXxY4TyN"
     }
+    ```
+
+    ## Test
+
+    ##### Sail:
+
+    ```bash
+      ./vendor/bin/sail test
+    ```
+
+    ##### Normal:
+
+    ```bash
+        php artisan test
     ```
