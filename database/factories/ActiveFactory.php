@@ -12,10 +12,9 @@ class ActiveFactory extends Factory
 
     // Lista de tickers brasileiros
     private $tickers = [
-        'PETR3.SA', 'VALE3.SA', 'ITUB4.SA', 'ABEV3.SA', 'BBAS3.SA',
+        'VALE3.SA', 'ITUB4.SA','BBAS3.SA',
         'MGLU3.SA', 'WEGE3.SA', 'LREN3.SA', 'USIM5.SA', 'CSNA3.SA',
-        'GGBR4.SA', 'KROT3.SA', 'RADL3.SA', 'Petr4.SA', 'TRPL4.SA',
-        'LAME4.SA', 'HYPE3.SA', 'B3SA3.SA', 'CIEL3.SA', 'RENT3.SA',
+        'GGBR4.SA', 'KROT3.SA', 'RADL3.SA','TRPL4.SA'
     ];
 
     public function definition()
