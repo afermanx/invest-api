@@ -89,7 +89,7 @@ cd invest-api
     ##### Sail:
 
     ```bash
-      ./vendor/bin/sail test
+      ./vendor/bin/sail art test
     ```
 
     ##### Normal:
