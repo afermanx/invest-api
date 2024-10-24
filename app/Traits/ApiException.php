@@ -37,4 +37,9 @@ trait ApiException
     {
         throw new InvestException($exception, 404);
     }
+
+    public function throwApiException(array|string $exception): void
+    {
+        throw new InvestException($exception, 500);
+    }
 }

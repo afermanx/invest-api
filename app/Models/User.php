@@ -6,6 +6,7 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -45,5 +46,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+
+    /**
+     * The actives that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Active>
+     */
+    public function actives(): HasMany
+    {
+        return $this->hasMany(Active::class);
+    }
+
+    /**
+     * Get the transactions for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Transaction>
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
