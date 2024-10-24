@@ -102,8 +102,9 @@ class ActiveService
             ];
         }
         $lastRefreshed = $res['Meta Data']['3. Last Refreshed'];
+
         return [
-           $ticker => $res["Time Series (Daily)"][$lastRefreshed]["4. close"]
+           $ticker =>  number_format($res["Time Series (Daily)"][$lastRefreshed]["4. close"], 2, ',', '.'),
         ];
     }
 

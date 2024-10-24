@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\{
     Auth\AuthController,
     ActiveController,
@@ -32,7 +33,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('users')->group(function () {
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::get('/me', function (Request $request) {
-                return $request->user();
+                return UserResource::make($request->user());
             });
         });
 
