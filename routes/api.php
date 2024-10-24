@@ -10,7 +10,10 @@ use App\Http\Controllers\{
     GetActivePriceDailyController,
     GetActiveTypesController,
     SellActiveController,
-
+    GetTotalActiveController,
+    GetMonthlyTransactionsController,
+    GetActiveDistributionByTypeController,
+    GetTotalPriceActivesController,
 };
 
 Route::prefix('v1')->group(function () {
@@ -42,19 +45,26 @@ Route::prefix('v1')->group(function () {
 
         // Rotas de Active (CRUD)
 
-       Route::prefix('actives')->group(function () {
-        Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
-        Route::post('/types', GetActiveTypesController::class);
-        Route::post('/buy', BuyActiveController::class);
-        Route::post('sell', SellActiveController::class);
-        Route::controller(ActiveController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::post('/', 'store');
-            Route::get('/{active}', 'show');
-            Route::put('/{active}', 'update');
-            Route::delete('/{active}', 'destroy');
+        Route::prefix('actives')->group(function () {
+            Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
+            Route::post('/types', GetActiveTypesController::class);
+            Route::post('/buy', BuyActiveController::class);
+            Route::post('sell', SellActiveController::class);
+            Route::controller(ActiveController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{active}', 'show');
+                Route::put('/{active}', 'update');
+                Route::delete('/{active}', 'destroy');
+            });
         });
-    });
+
+        Route::prefix('dashboard')->group(function () {
+            Route::get('/total-actives', GetTotalActiveController::class);
+            Route::get('/monthly-transactions', GetMonthlyTransactionsController::class);
+            Route::get('/active-distribution-by-type', GetActiveDistributionByTypeController::class);
+            Route::get('/total-price-actives', GetTotalPriceActivesController::class);
+        });
 
 
     });
