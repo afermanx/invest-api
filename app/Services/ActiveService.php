@@ -42,6 +42,9 @@ class ActiveService
 
     public function find(string $ticker): Active
     {
+        if (!Active::activeWithUserAuth()->where('ticker', $ticker)->exists()) {
+            $this->preConditionFailedException('Ativo não encontrado');
+        }
         return Active::activeWithUserAuth()->where('ticker', $ticker)->firstOrFail();
     }
 
@@ -51,9 +54,10 @@ class ActiveService
         return $active;
     }
 
-    public function delete(Active $active): void
+    public function delete(Active $active)
     {
-        $active->delete();
+
+        $active->activeWithUserAuth()->delete();
     }
 
     /**
