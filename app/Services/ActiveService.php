@@ -40,6 +40,11 @@ class ActiveService
         return Active::create($this->sanitizeData($data));
     }
 
+    public function find(string $ticker): Active
+    {
+        return Active::activeWithUserAuth()->where('ticker', $ticker)->firstOrFail();
+    }
+
     public function update(Active $active, array $data): Active
     {
         $active->update($data);
@@ -87,11 +92,6 @@ class ActiveService
         return [
            $ticker =>  number_format($res["Time Series (Daily)"][$lastRefreshed]["4. close"], 2, ',', '.'),
         ];
-    }
-
-    public function buyActive(array $data)
-    {
-        
     }
 
     /**

@@ -48,6 +48,8 @@ class User extends Authenticatable
         ];
     }
 
+
+
     /**
      * The actives that belong to the User
      *
@@ -56,5 +58,15 @@ class User extends Authenticatable
     public function actives(): HasMany
     {
         return $this->hasMany(Active::class);
+    }
+
+    /**
+     * Get the transactions for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Transaction>
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

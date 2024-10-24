@@ -41,16 +41,16 @@ class ActiveController extends Controller
      */
     public function store(ActiveStoreRequest $request): JsonResponse
     {
-       $active = $this->service->create($request->all());
+       $active = $this->service->create($request->validated());
        return $this->ok(ActiveResource::make($active));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Active $active): JsonResponse
+    public function show(string $tiker): JsonResponse
     {
-        return $this->ok(ActiveResource::make($active));
+        return $this->ok(ActiveResource::make($this->service->find($tiker)));
     }
 
     /**

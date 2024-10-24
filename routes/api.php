@@ -6,8 +6,11 @@ use App\Http\Resources\UserResource;
 use App\Http\Controllers\{
     Auth\AuthController,
     ActiveController,
+    BuyActiveController,
     GetActivePriceDailyController,
     GetActiveTypesController,
+    SellActiveController,
+
 };
 
 Route::prefix('v1')->group(function () {
@@ -42,12 +45,14 @@ Route::prefix('v1')->group(function () {
        Route::prefix('actives')->group(function () {
         Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
         Route::post('/types', GetActiveTypesController::class);
+        Route::post('/buy', BuyActiveController::class);
+        Route::post('sell', SellActiveController::class);
         Route::controller(ActiveController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/', 'store');
-            Route::get('/{id}', 'show');
-            Route::put('/{id}', 'update');
-            Route::delete('/{id}', 'destroy');
+            Route::get('/{active}', 'show');
+            Route::put('/{active}', 'update');
+            Route::delete('/{active}', 'destroy');
         });
     });
 
