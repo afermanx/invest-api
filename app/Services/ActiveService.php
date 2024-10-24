@@ -62,25 +62,6 @@ class ActiveService
     }
 
     /**
-     * Sanitizes the given data before creating or updating an Active model.
-     * If the 'name' key is not present, it will be set to the 'ticker' value.
-     * The 'user_id' key will be set to the current authenticated user's id.
-     * The 'purchase_date' key will be set to the current date and time.
-     *
-     * @param array $data
-     * @return array
-     */
-    private function sanitizeData(array &$data): array
-    {
-        return [
-            ...$data,
-            'name'=> $data['name'] ?? $data['ticker'],
-            'user_id' => auth()->user()->id,
-            'purchase_date' => now(),
-        ];
-    }
-
-    /**
      * Busca o preco de fechamento do ativo com a chave $ticker no dia anterior
      * @param string $ticker Chave do ativo
      * @return array com a chave $ticker e o preco de fechamento do ativo
@@ -105,6 +86,30 @@ class ActiveService
 
         return [
            $ticker =>  number_format($res["Time Series (Daily)"][$lastRefreshed]["4. close"], 2, ',', '.'),
+        ];
+    }
+
+    public function buyActive(array $data)
+    {
+        
+    }
+
+    /**
+     * Sanitizes the given data before creating or updating an Active model.
+     * If the 'name' key is not present, it will be set to the 'ticker' value.
+     * The 'user_id' key will be set to the current authenticated user's id.
+     * The 'purchase_date' key will be set to the current date and time.
+     *
+     * @param array $data
+     * @return array
+     */
+    private function sanitizeData(array &$data): array
+    {
+        return [
+            ...$data,
+            'name'=> $data['name'] ?? $data['ticker'],
+            'user_id' => auth()->user()->id,
+            'purchase_date' => now(),
         ];
     }
 
