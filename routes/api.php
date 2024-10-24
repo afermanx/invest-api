@@ -48,14 +48,14 @@ Route::prefix('v1')->group(function () {
         Route::prefix('actives')->group(function () {
             Route::post('/get-active-price-daily', GetActivePriceDailyController::class);
             Route::post('/types', GetActiveTypesController::class);
-            Route::post('/buy', BuyActiveController::class);
-            Route::post('sell', SellActiveController::class);
+            Route::post('/buy', BuyActiveController::class)->name('active.buy');
+            Route::post('sell', SellActiveController::class)->name('active.sell');
             Route::controller(ActiveController::class)->group(function () {
-                Route::get('/', 'index');
-                Route::post('/', 'store');
-                Route::get('/{active}', 'show');
-                Route::put('/{active}', 'update');
-                Route::delete('/{active}', 'destroy');
+                Route::get('/', 'index')->name('actives.index');
+                Route::post('/', 'store')->name('actives.store');
+                Route::get('/{active}', 'show')->name('actives.show');
+                Route::patch('/{active}', 'update')->name('actives.update');
+                Route::delete('/{active}', 'destroy')->name('actives.destroy');
             });
         });
 
