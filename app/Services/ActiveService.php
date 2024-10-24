@@ -94,6 +94,53 @@ class ActiveService
         ];
     }
 
+    public function getTotalActives(): array
+    {
+        return [
+            'total_actives' => Active::activeWithUserAuth()->count(),
+        ];
+    }
+
+    public function getActiveDistributionByType()
+    {
+        return Active::with('transactions')
+        ->activeWithUserAuth()
+        ->get()
+        ->groupBy('type')
+        ->map(function ($actives, $type) {
+            $totalValue = $actives->reduce(function ($carry, $active) {
+                $transactionTotal = $active->transactions->reduce(function ($sum, $transaction) {
+                    return $sum + ($transaction->quantity * $transaction->price);
+                }, 0);
+
+                return $carry + $transactionTotal;
+            }, 0);
+
+            return [
+                'type' => $type,
+                'total' => number_format($totalValue, 2, ',', '.')
+            ];
+        })->values();
+    }
+
+    public function getTotalPriceActives(): array
+    {
+       $totalGross = Active::with('transactions')
+        ->activeWithUserAuth()
+        ->get()
+        ->reduce(function ($carry, $active) {
+            $transactionTotal = $active->transactions->reduce(function ($sum, $transaction) {
+                return $sum + ($transaction->quantity * $transaction->price);
+            }, 0);
+
+            return $carry + $transactionTotal;
+        }, 0);
+
+        return [
+            'total' => number_format($totalGross, 2, ',', '.')
+        ];
+    }
+
     /**
      * Sanitizes the given data before creating or updating an Active model.
      * If the 'name' key is not present, it will be set to the 'ticker' value.

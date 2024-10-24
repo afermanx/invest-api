@@ -10,8 +10,8 @@ enum TypesEnum: string
     public static function getTypes(): array
     {
         return [
-            self::buy,
-            self::sell,
+            self::BUY,
+            self::SELL,
         ];
     }
 }

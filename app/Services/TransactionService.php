@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Services;
-
-use App\Models\Active;
-use App\Models\Transaction;
+use App\Models\{
+    Transaction,
+    Active,
+};
 use App\Traits\ApiException;
 use Illuminate\Support\Facades\DB;
 use App\Enums\Transaction\TypesEnum;
@@ -96,6 +97,16 @@ class TransactionService
             ]);
             return $transaction;
         });
+    }
+
+    public function getMonthlyTransactions()
+    {
+        $transactions = $this->model->transactionUserAuth()
+                ->whereMonth('date', date('m'))
+                ->select('type', \DB::raw('COUNT(*) as total'))
+                ->groupBy('type')
+                ->get();
+        return $transactions;
     }
 
     /**
