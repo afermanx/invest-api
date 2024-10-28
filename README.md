@@ -80,7 +80,7 @@ cd invest-api
         "message": "Welcome!",
         "name": "Invest-api",
         "version": "1.0.0",
-        "documentation": "https://documenter.getpostman.com/view/5380407/2sAXxY4TyN"
+        "documentation": "https://documenter.getpostman.com/view/5380407/2sAY4shiXi"
     }
     ```
 
