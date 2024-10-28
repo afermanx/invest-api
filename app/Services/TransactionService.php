@@ -102,11 +102,16 @@ class TransactionService
     public function getMonthlyTransactions()
     {
         $transactions = $this->model->transactionUserAuth()
-                ->whereMonth('date', date('m'))
-                ->select('type', \DB::raw('COUNT(*) as total'))
-                ->groupBy('type')
-                ->get();
-        return $transactions;
+    ->whereMonth('date', date('m'))
+    ->select('type', \DB::raw('COUNT(*) as total'))
+    ->groupBy('type')
+    ->get()
+    ->keyBy('type');
+    return [
+        'buy' => $transactions->get(TypesEnum::BUY->value)->total ?? 0,
+        'sell' => $transactions->get(TypesEnum::SELL->value)->total ?? 0,
+    ];
+
     }
 
     /**
